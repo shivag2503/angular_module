@@ -1,0 +1,50 @@
+<form [formGroup]="predictionForm" (ngSubmit)="predict()">
+  <label>Enter SAT Score:</label>
+  <input type="number" class="form-control" id="sat" formControlName="sat" />
+  <div
+    *ngIf="
+      predictionForm.controls['sat'].touched &&
+      predictionForm.controls['sat'].errors
+    "
+  >
+    <div
+      class="alert alert-danger"
+      *ngIf="predictionForm.controls['sat'].errors.required"
+    >
+      SAT score is required.
+    </div>
+  </div>
+  <div *ngIf="predictionForm.controls['sat'].errors">
+    <div
+      class="alert alert-danger"
+      *ngIf="predictionForm.controls['sat'].errors.min"
+    >
+    Negative SAT score is not valid
+    </div>
+  </div>
+  <div *ngIf="predictionForm.controls['sat'].errors">
+    <div
+      class="alert alert-danger"
+      *ngIf="predictionForm.controls['sat'].errors.max"
+    >
+      SAT score greater than 2400 is not valid
+    </div>
+  </div>
+  <div *ngIf="predictionForm.controls['sat'].errors">
+    <div
+      class="alert alert-danger"
+      *ngIf="predictionForm.controls['sat'].errors.pattern"
+    >
+     SAT score is not valid
+    </div>
+  </div>
+<br>
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="!predictionForm.valid"
+  >
+    Predict
+  </button>
+</form>
+{{my_string}}
